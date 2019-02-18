@@ -82,13 +82,15 @@ public class Cs310DatabaseJson {
                         
                         JSONArray colHeaders = new JSONArray();
                         
-                        for (int i = 1; i <= columnCount; i++) {
+                        for (int i = 2; i <= columnCount; i++) {
 
                             colHeaders.add(metadata.getColumnLabel(i));
 
                         }
                         
                         /* Get Data; Print as Table Rows */
+                        
+
                         
                         while(resultset.next()) {
                             
@@ -100,9 +102,11 @@ public class Cs310DatabaseJson {
                             
                             /* Loop Through ResultSet Columns; Print Values */
 
-                            for (int i = 2; i <= columnCount; i++) {
+                            for (int i = 0; i <= columnCount -2; i++) {
 
-                                jsonObject.put(metadata.getColumnLabel(i), resultset.getString(i));
+                                String colName = (String)colHeaders.get(i);
+                                    
+                                jsonObject.put(colHeaders.get(i), resultset.getString(colName));
 
                             }
                             
